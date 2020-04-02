@@ -11,3 +11,4 @@ E:\GitBackup\FlashCardsApp\FlashCardsApp\FlashCardsApp\FlashCardsApp\bin\Debug\n
 E:\GitBackup\FlashCardsApp\FlashCardsApp\FlashCardsApp\FlashCardsApp\bin\Debug\netstandard2.0\ref\FlashCardsApp.dll
 E:\GitBackup\FlashCardsApp\FlashCardsApp\FlashCardsApp\FlashCardsApp\bin\Debug\netstandard2.0\FlashCardsApp.pdb
 E:\GitBackup\FlashCardsApp\FlashCardsApp\FlashCardsApp\FlashCardsApp\obj\Debug\netstandard2.0\XamlC.stamp
+E:\GitBackup\FlashCardsApp\FlashCardsApp\FlashCardsApp\FlashCardsApp\obj\Debug\netstandard2.0\SubjectPage.xaml.g.cs

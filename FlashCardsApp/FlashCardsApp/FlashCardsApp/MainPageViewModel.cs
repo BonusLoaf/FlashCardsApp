@@ -11,20 +11,25 @@ namespace FlashCardsApp
 
         private List<string> _subjects;
 
-
-
-
-
+       
         public List<string> subjects
         {
             get => _subjects;
             set
             {
+
+
                 if (_subjects == value) return;
+
+
+
                 _subjects = value;
                 
             }
         }
+
+
+        
 
 
         public MainPageViewModel()

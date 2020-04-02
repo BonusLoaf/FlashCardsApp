@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Windows.Input;
 
 namespace FlashCardsApp
 {
@@ -29,19 +30,22 @@ namespace FlashCardsApp
 
 
 
-            OtherList.ItemsSource = new string[]
-            {
+            SubjectsListView.ItemTapped += SubjectListView_ItemTapped;
 
-            };
-        
-          
+
 
 
 
         }
 
+        private async void SubjectListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            int selectedRow = e.ItemIndex;
+            lbl1.Text = selectedRow.ToString();
 
-       
+            //var nextPage = new SubjectPage();
 
+            await Navigation.PushAsync(new SubjectPage(selectedRow));
+        }
     }
 }

@@ -13,19 +13,26 @@
                HorizontalOptions="Center"
                />
 
-        <Label Text="Naaaaaae"
+        <Label
+            x:Name="lbl1"
+            Text="Naaaaaae"
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"/>
 
 
-        <ListView x:Name="OtherList"/>
-
-        <ListView ItemsSource="{Binding subjects}"
+        <ListView 
+            
+            ItemsSource="{Binding subjects}"
+                  SelectionMode="Single"
                   x:Name="SubjectsListView"
+                  SelectedItem="{Binding SelectedSubject}"
                   HorizontalOptions="Center"
-                  VerticalOptions="CenterAndExpand"/>
+                  VerticalOptions="CenterAndExpand"
+                    />
 
-       
+
+
+
 
 
         <Label Text="Yeeeeeeeeeees"

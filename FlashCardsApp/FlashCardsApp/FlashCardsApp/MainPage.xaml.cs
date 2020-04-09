@@ -15,25 +15,23 @@ namespace FlashCardsApp
     public partial class MainPage : ContentPage
     {
 
-        private MainPageViewModel viewModel;
+        public MainPageViewModel viewModel;
 
+        public MainPage mp;
 
         public MainPage()
         {
             InitializeComponent();
 
+            mp = this;
 
-
-            viewModel = new MainPageViewModel();
+            viewModel = new MainPageViewModel(mp);
 
             BindingContext = viewModel;
 
 
 
             SubjectsListView.ItemTapped += SubjectListView_ItemTapped;
-
-
-
 
 
         }
@@ -45,7 +43,7 @@ namespace FlashCardsApp
 
             //var nextPage = new SubjectPage();
 
-            await Navigation.PushAsync(new SubjectPage(selectedRow));
+            await Navigation.PushAsync(new SubjectPage(selectedRow, viewModel));
         }
     }
 }

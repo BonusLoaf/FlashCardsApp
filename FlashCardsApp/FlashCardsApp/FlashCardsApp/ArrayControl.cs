@@ -56,16 +56,73 @@ namespace FlashCardsApp
         //    return JsonConvert.SerializeObject(this);
         //}
 
-        public static Subject[] subjectArray;
+        public static Subject[] subjectArray = new Subject[3];
+        //
+        public static CardData[] cardArray = new CardData[3];
+        public static CardData[] cardArray0 = new CardData[3];
+        public static CardData[] cardArray1 = new CardData[3];
+        public static CardData[] cardArray2 = new CardData[3];
 
         public static string[] testSubjectArray = new string[3];
+
+        public static void subjectArrayTests()
+        {
+           // Subject[] subjectArray = new Subject[3];
+           // CardData[] cardArray = new CardData[3];
+
+
+
+
+            cardArray0[0] = new CardData("sub 0 question 0", "sub 0 answer 0");
+            cardArray0[1] = new CardData("sub 0 question 1", "sub 0 answer 1");
+            cardArray0[2] = new CardData("sub 0 question 2", "sub 0 answer 2");
+            
+            cardArray1[0] = new CardData("sub 1 question 0", "sub 1 answer 0");
+            cardArray1[1] = new CardData("sub 1 question 1", "sub 1 answer 1");
+            cardArray1[2] = new CardData("sub 1 question 2", "sub 1 answer 2");
+            
+            cardArray2[0] = new CardData("sub 2 question 0", "sub 2 answer 0");
+            cardArray2[1] = new CardData("sub 2 question 1", "sub 2 answer 1");
+            cardArray2[2] = new CardData("sub 2 question 2", "sub 2 answer 2");
+
+            //for (int i = 0; i < subjectArray.Length; i++)
+            //{
+            //    for (int j = 0; j < 3; j++)
+            //    {
+            //        cardArray[j] = new CardData("sub " + i + ", question " + j, "answer " + j);
+            //    }
+            //    subjectArray[i] = new Subject("Subject name " + i, 3, cardArray);
+            //}
+            subjectArray[0] = new Subject("Subject name 0", 3, cardArray0);
+            subjectArray[1] = new Subject("Subject name 1", 3, cardArray1);
+            subjectArray[2] = new Subject("Subject name 2", 3, cardArray2);
+
+            //CreateSubject("Brand new subject");
+
+            //CreateCard(1);
+
+            //updateArrayTests();
+
+        }
+
+        public static void updateArrayTests() 
+        {
+            for (int i = 0; i < subjectArray.Length; i++)
+            {
+                for (int j = 0; j < subjectArray[i].getNumberOfCards(); j++)
+                {
+                    cardArray[j] = new CardData("sub " + i + " question " + j, "sub " + i + "answer " + j);
+                }
+                subjectArray[i] = new Subject("Subject name " + i, subjectArray[i].getNumberOfCards(), cardArray);
+            }
+        }
 
 
         //*********************************************************************
         //                       CARD CONTROL START
         //*********************************************************************
 
-        public void CreateCard(int selectedSubject, string newCardQuestion, string newCardAnswer)
+        public static void CreateCard(int selectedSubject)
         {
 
             //gets the number of cards in the array currently and creates a temporary array with their data
@@ -82,11 +139,14 @@ namespace FlashCardsApp
             subjectArray[selectedSubject].setCardData(tempCardArray);
 
             //sets the values for the empty card at the end of the array
-            subjectArray[selectedSubject].getCardData()[newNumCards].setCardQuestion(newCardQuestion);
-            subjectArray[selectedSubject].getCardData()[newNumCards].setCardAnswer(newCardAnswer);
+
+            subjectArray[selectedSubject].getCardData()[newNumCards -1] = new CardData("new card question", "new card answer");
+
+            //subjectArray[selectedSubject].getCardData()[newNumCards].setCardQuestion(newCardQuestion);
+            //subjectArray[selectedSubject].getCardData()[newNumCards].setCardAnswer(newCardAnswer);
         }
 
-        public void deleteCard(int selectedSubject, int selectedCard)
+        public static void deleteCard(int selectedSubject, int selectedCard)
         {
            
             //gets number of cards
@@ -115,7 +175,7 @@ namespace FlashCardsApp
             subjectArray[selectedSubject].setNumberOfCards(numCards - 1);
         }
 
-        public void editCard(int selectedSubject, int selectedCard, string newCardQuestion, string newCardAnswer)
+        public static void editCard(int selectedSubject, int selectedCard, string newCardQuestion, string newCardAnswer)
         {
             //uses the int value of the selected subject and card to find the card to be edited...
             //...and sets the values of the question and answer to the input values. 
@@ -132,20 +192,22 @@ namespace FlashCardsApp
         //                       SUBJECT CONTROL START
         //*********************************************************************
 
-        public void CreateSubject(string newSubjectName)       
+        //test Complete, works as intended
+        public static void CreateSubject(string newSubjectName)
         {
-            //resizes the subject array and sets the number of cards in the new array to zero (so it isnt null)
-            Array.Resize(ref subjectArray, subjectArray.Length + 1);
-            subjectArray[subjectArray.Length - 1].setNumberOfCards(0);
-
-            string tempQuestion = "Enter question here";
-            string tempAnswer = "enter answer here";
-
+            
             //creates a temporary card so no errors are thrown when accessing new subject for the first time
-            CreateCard((subjectArray.Length - 1), tempQuestion, tempAnswer);
+            CardData[] newcardArray = new CardData[1];
+            newcardArray[0] = new CardData("Enter question here", "enter answer here");
+
+
+            //resizes the subject array and sets the number of cards in the new array to one (so it isnt null)
+            Array.Resize(ref subjectArray, subjectArray.Length + 1);
+            subjectArray[subjectArray.Length - 1] = new Subject("new Subject", 1, newcardArray);
         }
 
-        public void DeleteSubject(int selectedSubject) 
+        //test Complete, works as intended
+        public static void DeleteSubject(int selectedSubject) 
         {
             //Grabs number of total subjects
             int numSubjects = subjectArray.Length;
@@ -167,6 +229,12 @@ namespace FlashCardsApp
 
             //replaces original subject array with temporary array
             subjectArray = tempSubject;
+        }
+
+        //test Incomplete
+        public static void EditSubject(int selectedSubject, string newSubjectName)
+        {
+            subjectArray[selectedSubject].setSubjectName(newSubjectName);
         }
 
         //*********************************************************************

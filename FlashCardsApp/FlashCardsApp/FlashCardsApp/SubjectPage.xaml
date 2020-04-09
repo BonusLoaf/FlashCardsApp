@@ -14,15 +14,28 @@
             <Button x:Name="btnDelete"
                     Text="Delete Subject"
                     VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"/>
+                HorizontalOptions="CenterAndExpand"
+                    Clicked="btnDelete_Clicked"  
+                    />
             <Button x:Name="btnCreate"
                     Text="Create New Card"
                     VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"/>
-            <Button x:Name="btnView"
-                    Text="Study"
-                    VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"/>
+                HorizontalOptions="CenterAndExpand"
+                    Clicked="btnCreate_Clicked" 
+                    />
+            
+
+            <ListView 
+            
+            ItemsSource="{Binding cards}"
+                  SelectionMode="Single"
+                  x:Name="CardsListView"
+                  SelectedItem="{Binding SelectedCard}"
+                  HorizontalOptions="Center"
+                  VerticalOptions="CenterAndExpand"
+                    />
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

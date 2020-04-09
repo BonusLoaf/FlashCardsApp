@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 namespace FlashCardsApp
 {
-    class MainPageViewModel
+    public class MainPageViewModel
     {
 
+        public static int number = 0;
 
         private List<string> _subjects;
 
-       
+
+        public MainPage pubMP;
+
         public List<string> subjects
         {
             get => _subjects;
@@ -21,37 +24,48 @@ namespace FlashCardsApp
 
                 if (_subjects == value) return;
 
-
-
                 _subjects = value;
                 
+
             }
         }
 
 
-        
 
-
-        public MainPageViewModel()
+        public MainPageViewModel(MainPage mp)
         {
 
+            pubMP = mp;
+
+            updateListView();
+
+        }
+
+        public void updateListView()
+        {
 
             subjects = new List<string>();
 
 
-            ArrayControl.fillArray();
 
-
-
-            for (int i = 0; i < ArrayControl.testSubjectArray.Length; i++)
+            if(number == 0)
             {
-
-                subjects.Add(ArrayControl.testSubjectArray[i]);
-
+                ArrayControl.subjectArrayTests();
+                number += 1;
+            }
+            else
+            {
+                ArrayControl.updateArrayTests();
             }
             
 
 
+            for (int i = 0; i < ArrayControl.subjectArray.Length; i++)
+            {
+
+                subjects.Add(ArrayControl.subjectArray[i].getSubjectName());
+
+            }
         }
 
 

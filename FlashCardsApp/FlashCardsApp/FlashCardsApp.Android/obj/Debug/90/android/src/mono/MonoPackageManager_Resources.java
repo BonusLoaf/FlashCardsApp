@@ -3,9 +3,14 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "FlashCardsApp.Android.dll" comes first in this list. */
 		"FlashCardsApp.Android.dll",
+		"Azure.Core.dll",
 		"FlashCardsApp.dll",
 		"FormsViewGroup.dll",
+		"Microsoft.Azure.DocumentDB.Core.dll",
+		"Microsoft.Bcl.AsyncInterfaces.dll",
 		"Newtonsoft.Json.dll",
+		"System.Collections.Immutable.dll",
+		"System.Diagnostics.DiagnosticSource.dll",
 		"Xamarin.Android.Arch.Core.Common.dll",
 		"Xamarin.Android.Arch.Core.Runtime.dll",
 		"Xamarin.Android.Arch.Lifecycle.Common.dll",

@@ -53,10 +53,7 @@ namespace FlashCardsApp
                 ArrayControl.subjectArrayTests();
                 number += 1;
             }
-            else
-            {
-                ArrayControl.updateArrayTests();
-            }
+            
             
 
 

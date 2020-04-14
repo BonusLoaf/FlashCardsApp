@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FlashCardsApp
 {
-    class SubjectPageViewModel
+    public class SubjectPageViewModel
     {
 
         private List<string> _cards;
@@ -33,6 +33,16 @@ namespace FlashCardsApp
         {
 
 
+            updateListView(selectedSubject);
+
+
+        }
+
+
+        public void updateListView(int selectedSubject)
+        {
+
+
             cards = new List<string>();
 
 
@@ -48,8 +58,10 @@ namespace FlashCardsApp
             }
 
 
-        }
+            
 
+
+        }
 
 
 

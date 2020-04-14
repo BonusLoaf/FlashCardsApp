@@ -49,7 +49,22 @@ namespace FlashCardsApp
         private void btnCreateSbj_Clicked(object sender, EventArgs e)
         {
             ArrayControl.CreateSubject("New Subject");
+
+
+            UpdateSubjects();
         }
+
+        public void UpdateSubjects()
+        {
+
+
+            viewModel.updateListView();
+
+            SubjectsListView.ItemsSource = null;
+            SubjectsListView.ItemsSource = viewModel.subjects;
+
+        }
+
 
     }
 }

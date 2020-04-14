@@ -15,6 +15,8 @@ namespace FlashCardsApp
 
         private SubjectPageViewModel viewModel;
 
+        public SubjectPageViewModel pubViewModel;
+
         public static int pubSelectedSubject = 0;
 
         public MainPageViewModel pubMainPageVM;
@@ -36,14 +38,17 @@ namespace FlashCardsApp
 
             CardsListView.ItemTapped += CardsListView_ItemTapped;
 
+            pubViewModel = viewModel;
+
             
+
         }
 
         private async void CardsListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             int selectedRow = e.ItemIndex;
 
-            await Navigation.PushAsync(new CardPage(pubSelectedSubject,selectedRow));
+            await Navigation.PushAsync(new CardPage(pubSelectedSubject,selectedRow, this));
         }
 
        
@@ -52,21 +57,13 @@ namespace FlashCardsApp
         {
             ArrayControl.DeleteSubject(pubSelectedSubject);
 
-            //new NavigationPage(new MainPage());
+            
 
 
             this.Navigation.RemovePage(this);
 
-            
 
-            //var vUpdatedPage = new MainPage(); 
-            
-            //Navigation.InsertPageBefore(vUpdatedPage, this); Navigation.PopAsync();
-
-
-            //this.Navigation.RemovePage(pubMainPageVM.pubMP);
-
-
+            pubMainPageVM.pubMP.UpdateSubjects();
 
         }
 
@@ -74,5 +71,17 @@ namespace FlashCardsApp
         {
             ArrayControl.CreateCard(pubSelectedSubject);
         }
+
+
+        public void updateCards()
+        {
+
+            viewModel.updateListView(pubSelectedSubject);
+
+            CardsListView.ItemsSource = null;
+            CardsListView.ItemsSource = viewModel.cards;
+
+        }
+
     }
 }

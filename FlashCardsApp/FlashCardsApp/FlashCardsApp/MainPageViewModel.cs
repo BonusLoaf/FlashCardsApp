@@ -26,7 +26,7 @@ namespace FlashCardsApp
 
                 _subjects = value;
                 
-
+                
             }
         }
 

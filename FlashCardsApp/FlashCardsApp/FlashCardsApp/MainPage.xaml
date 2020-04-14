@@ -19,6 +19,15 @@
                VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"/>
 
+        
+        <Button
+            x:Name="btnCreateSbj"
+            Text="Create New Subject"
+            VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+            Clicked="btnCreateSbj_Clicked"
+            />
+        
 
         <ListView 
             

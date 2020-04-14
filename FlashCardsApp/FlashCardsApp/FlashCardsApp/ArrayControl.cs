@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-//using Newtonsoft.Json;
+using Newtonsoft.Json;
 //using System.Net;
 //using System.Threading.Tasks;
 //using Microsoft.Azure.Cosmos;
@@ -51,10 +51,10 @@ namespace FlashCardsApp
         //
         //*****************DATABASE END *********************
 
-        //public override string ToString()
-        //{
-        //    return JsonConvert.SerializeObject(this);
-        //}
+        
+        
+        
+        
 
         public static Subject[] subjectArray = new Subject[3];
         //
@@ -97,12 +97,29 @@ namespace FlashCardsApp
             subjectArray[1] = new Subject("Subject name 1", 3, cardArray1);
             subjectArray[2] = new Subject("Subject name 2", 3, cardArray2);
 
-            //CreateSubject("Brand new subject");
+            saveArray();
 
-            //CreateCard(1);
+        }
 
-            //updateArrayTests();
+        public static void saveArray()
+        {
+            //File.WriteAllText("Subjects.json", JsonConvert.SerializeObject(subjectArray));
+             using (StreamWriter file = File.CreateText(@"c:\Subjects.json"))
+             {
+                 JsonSerializer serializer = new JsonSerializer();
+                 serializer.Serialize(file, subjectArray);
+             }          
 
+
+
+        }
+
+        public static void loadArray()
+        {
+            Subject[] subjectArrayTemp = JsonConvert.DeserializeObject<Subject[]>(File.ReadAllText(@"c:\Subjects.json"));
+
+            subjectArray = subjectArrayTemp;
+  
         }
 
         public static void updateArrayTests() 
@@ -203,7 +220,7 @@ namespace FlashCardsApp
 
             //resizes the subject array and sets the number of cards in the new array to one (so it isnt null)
             Array.Resize(ref subjectArray, subjectArray.Length + 1);
-            subjectArray[subjectArray.Length - 1] = new Subject("new Subject", 1, newcardArray);
+            subjectArray[subjectArray.Length - 1] = new Subject(newSubjectName, 1, newcardArray);
         }
 
         //test Complete, works as intended

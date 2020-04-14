@@ -57,9 +57,16 @@ namespace FlashCardsApp
 
             this.Navigation.RemovePage(this);
 
+            
+
+            //var vUpdatedPage = new MainPage(); 
+            
+            //Navigation.InsertPageBefore(vUpdatedPage, this); Navigation.PopAsync();
+
+
             //this.Navigation.RemovePage(pubMainPageVM.pubMP);
 
-            
+
 
         }
 

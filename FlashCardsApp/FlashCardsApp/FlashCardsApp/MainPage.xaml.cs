@@ -45,5 +45,11 @@ namespace FlashCardsApp
 
             await Navigation.PushAsync(new SubjectPage(selectedRow, viewModel));
         }
+
+        private void btnCreateSbj_Clicked(object sender, EventArgs e)
+        {
+            ArrayControl.CreateSubject("New Subject");
+        }
+
     }
 }

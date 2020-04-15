@@ -59,7 +59,7 @@ namespace FlashCardsApp
                 question.IsReadOnly = false;
                 answer.IsReadOnly = false;
 
-
+                answer.TextColor = Color.Black;
 
 
             }
@@ -81,6 +81,13 @@ namespace FlashCardsApp
 
             }
 
+
+        }
+
+        private void btnShow_Clicked(object sender, EventArgs e)
+        {
+
+            answer.TextColor = Color.Black;
 
         }
     }

@@ -17,14 +17,26 @@
                    x:Name="answer"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
-                   IsReadOnly="True"/>
+                   IsReadOnly="True"
+                   TextColor="White"
+                   />
             <Button
                 Text="Edit"
                    x:Name="btnEdit"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="End" 
+                HorizontalOptions="FillAndExpand"
                 Clicked="btnEdit_Clicked"
-                BackgroundColor="Gray"
+                BackgroundColor="Gray"/>
+
+
+            <Button
+                Text="Show Answer"
+                   x:Name="btnShow"
+                VerticalOptions="End" 
+                HorizontalOptions="FillAndExpand"
+                Clicked="btnShow_Clicked"   
+                BackgroundColor="Blue"
+                
                 />
 
 

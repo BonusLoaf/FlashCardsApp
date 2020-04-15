@@ -14,42 +14,42 @@ namespace FlashCardsApp
         //*****************DATABASE START*********************
 
                     //add endpoint 
- //                  private static readonly string EndpointUri = "https://alberto-fernandez.documents.azure.com:443/";
- //                  
- //                  // The primary key for the Azure Cosmos account (to be added)
- //                  private static readonly string PrimaryKey = "kug8WIw5ULptERJvaKcF02Gf01G9ePWZSUk6WFeAuyUDdWlmdt5FXiRXSkdeB6RuXFL3Q117Poj7Mev6jGzAVg==";
- //                  
- //                  // The Cosmos client instance
- //                  private CosmosClient cosmosClient;
- //                  
- //                  // The database we will create
- //                  private Database database;
- //                  
- //                  // The container we will create.
- //                  private Container container;
- //                  
- //                  // The name of the database and container we will create
- //                  private string databaseId = "FlashCards";
- //                  private string containerId = "Soft262";
- //                  
- //                  
- //                    public async Task Go()
- //                    {
- //                  //createsan instance of cosmos client
- //                  this.cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
- //                  
- //                        
- //                    }
- //              //    ********************** PUT IN MAIN
- //                        //  {
- //                        //       ArrayControl p = new ArrayControl();
- //                        //       await p.Go();
- //                        //
- //                        //  }
- //              
- //              // ********************
- //              //
- //              //*****************DATABASE END ********************
+   //                private static readonly string EndpointUri = "https://alberto-fernandez.documents.azure.com:443/";
+   //                
+   //                // The primary key for the Azure Cosmos account (to be added)
+   //                private static readonly string PrimaryKey = "kug8WIw5ULptERJvaKcF02Gf01G9ePWZSUk6WFeAuyUDdWlmdt5FXiRXSkdeB6RuXFL3Q117Poj7Mev6jGzAVg==";
+   //                
+   //                // The Cosmos client instance
+   //                private CosmosClient cosmosClient;
+   //                
+   //                // The database we will create
+   //                private Database database;
+   //                
+   //                // The container we will create.
+   //                private Container container;
+   //                
+   //                // The name of the database and container we will create
+   //                private string databaseId = "FlashCards";
+   //                private string containerId = "Soft262";
+   //                
+   //                
+   //                  public async Task Go()
+   //                  {
+   //                //createsan instance of cosmos client
+   //                this.cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
+   //                
+   //                      
+   //                  }
+               //    ********************** PUT IN MAIN
+                         //  {
+                         //       ArrayControl p = new ArrayControl();
+                         //       await p.Go();
+                         //
+                         //  }
+               
+               // ********************
+               //
+               //*****************DATABASE END ********************
  //         
  //              public async Task Go()
  //              {
@@ -96,9 +96,6 @@ namespace FlashCardsApp
            // Subject[] subjectArray = new Subject[3];
            // CardData[] cardArray = new CardData[3];
 
-
-
-
             cardArray0[0] = new CardData("sub 0 question 0", "sub 0 answer 0");
             cardArray0[1] = new CardData("sub 0 question 1", "sub 0 answer 1");
             cardArray0[2] = new CardData("sub 0 question 2", "sub 0 answer 2");
@@ -111,37 +108,31 @@ namespace FlashCardsApp
             cardArray2[1] = new CardData("sub 2 question 1", "sub 2 answer 1");
             cardArray2[2] = new CardData("sub 2 question 2", "sub 2 answer 2");
 
-            //for (int i = 0; i < subjectArray.Length; i++)
-            //{
-            //    for (int j = 0; j < 3; j++)
-            //    {
-            //        cardArray[j] = new CardData("sub " + i + ", question " + j, "answer " + j);
-            //    }
-            //    subjectArray[i] = new Subject("Subject name " + i, 3, cardArray);
-            //}
             subjectArray[0] = new Subject("Subject name 0", 3, cardArray0);
             subjectArray[1] = new Subject("Subject name 1", 3, cardArray1);
             subjectArray[2] = new Subject("Subject name 2", 3, cardArray2);
 
-           
-
-
+            SaveArray();
         }
 
-        //public static void saveArray()
-        //{
-        //    //File.WriteAllText("Subjects.json", JsonConvert.SerializeObject(subjectArray));
-        //
-        //    /*
-        //    using (StreamWriter file = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Subjects.json"))
-        //    {
-        //        JsonSerializer serializer = new JsonSerializer();
-        //        serializer.Serialize(file, subjectArray);
-        //    }
-        //    */
-        //
-        //    
-        //}
+        public static void SaveArray()
+        {
+
+            string json = JsonConvert.SerializeObject(subjectArray, Formatting.Indented);
+            //File.WriteAllText(@"c:subject_storage.json", JsonConvert.SerializeObject(subjectArray));
+
+            //using (StreamWriter file = File.CreateText(@"c:\subject_storage.json"))
+            //{
+            //    JsonSerializer serializer = new JsonSerializer();
+            //    serializer.Serialize(file, subjectArray);
+            //}
+
+            using (StreamWriter text = new StreamWriter("E:\\subject_store.txt"))
+            {
+                text.WriteLine(json);
+            }
+
+        }
         //
         //public static void loadArray()
         //{

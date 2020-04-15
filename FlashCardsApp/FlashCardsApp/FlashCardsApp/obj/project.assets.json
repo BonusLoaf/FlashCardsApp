@@ -19,6 +19,18 @@
           "lib/netstandard2.0/Azure.Core.dll": {}
         }
       },
+      "ContextViewCell/2.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "2.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/ContextMenu.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ContextMenu.dll": {}
+        }
+      },
       "Microsoft.Azure.DocumentDB.Core/2.10.1": {
         "type": "package",
         "dependencies": {
@@ -1541,6 +1553,23 @@
         "lib/netstandard2.0/Azure.Core.dll",
         "lib/netstandard2.0/Azure.Core.xml",
         "pkgicon.png"
+      ]
+    },
+    "ContextViewCell/2.0.1": {
+      "sha512": "abOW3KkB8zRSBNQoqR2A31/RcpZGR9yyp2bXfT9eV8q7F4JgLtaFj1rGdRcHf5VWOWSLGUNBCaq9SBHticVhKA==",
+      "type": "package",
+      "path": "contextviewcell/2.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "contextviewcell.2.0.1.nupkg.sha512",
+        "contextviewcell.nuspec",
+        "lib/MonoAndroid10/ContextMenu.Droid.dll",
+        "lib/MonoAndroid10/ContextMenu.dll",
+        "lib/Xamarin.iOS10/ContextMenu.dll",
+        "lib/Xamarin.iOS10/ContextMenu.iOS.dll",
+        "lib/netstandard2.0/ContextMenu.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81/ContextMenu.dll"
       ]
     },
     "Microsoft.Azure.DocumentDB.Core/2.10.1": {
@@ -5602,6 +5631,7 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "Azure.Core >= 1.2.0",
+      "ContextViewCell >= 2.0.1",
       "Microsoft.Azure.DocumentDB.Core >= 2.10.1",
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 12.0.3",
@@ -5654,6 +5684,10 @@
           "Azure.Core": {
             "target": "Package",
             "version": "[1.2.0, )"
+          },
+          "ContextViewCell": {
+            "target": "Package",
+            "version": "[2.0.1, )"
           },
           "Microsoft.Azure.DocumentDB.Core": {
             "target": "Package",

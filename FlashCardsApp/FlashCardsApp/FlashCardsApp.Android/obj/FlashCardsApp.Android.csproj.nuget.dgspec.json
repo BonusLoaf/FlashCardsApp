@@ -100,6 +100,10 @@
               "target": "Package",
               "version": "[1.2.0, )"
             },
+            "ContextViewCell": {
+              "target": "Package",
+              "version": "[2.0.1, )"
+            },
             "Microsoft.Azure.DocumentDB.Core": {
               "target": "Package",
               "version": "[2.10.1, )"

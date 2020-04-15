@@ -3,33 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:FlashCardsApp"
              mc:Ignorable="d"
              x:Class="FlashCardsApp.CardPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Entry Text="-EMPTY-"
+
+
+    
+        <ContentPage.Content>
+        <local:SwipeContainer 
+                Swipe="SwipeContainer_Swipe"
+                >
+            <StackLayout>
+
+
+
+
+
+
+
+
+
+
+                <Entry Text="-EMPTY-"
                    x:Name="question"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                    IsReadOnly="True"
                    />
-            <Entry Text="-EMPTY-"
+
+
+
+
+                <Entry Text="-EMPTY-"
                    x:Name="answer"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                    IsReadOnly="True"
                    TextColor="White"
                    />
-            <Button
+                <Button
                 Text="Edit"
                    x:Name="btnEdit"
                 VerticalOptions="End" 
                 HorizontalOptions="FillAndExpand"
                 Clicked="btnEdit_Clicked"
-                BackgroundColor="Gray"/>
+                BackgroundColor="Gray"
+                
+                />
 
 
-            <Button
+                <Button
                 Text="Show Answer"
                    x:Name="btnShow"
                 VerticalOptions="End" 
@@ -42,6 +65,12 @@
 
 
 
-        </StackLayout>
+
+
+
+
+            </StackLayout>
+        </local:SwipeContainer>
     </ContentPage.Content>
+    
 </ContentPage>

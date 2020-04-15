@@ -8,6 +8,37 @@ using Xamarin.Forms.Xaml;
 
 namespace FlashCardsApp
 {
+
+
+
+    public class SwipeContainer : ContentView
+    {
+
+
+        public event EventHandler<SwipedEventArgs> Swipe;
+
+        public SwipeContainer()
+        {
+            GestureRecognizers.Add(GetSwipeGestureRecognizer(SwipeDirection.Up));
+        }
+
+        SwipeGestureRecognizer GetSwipeGestureRecognizer(SwipeDirection direction)
+        {
+            var swipe = new SwipeGestureRecognizer { Direction = direction };
+            swipe.Swiped += (sender, e) => Swipe?.Invoke(this, e);
+            return swipe;
+        }
+
+
+
+
+
+    }
+
+
+
+
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardPage : ContentPage
     {
@@ -46,6 +77,15 @@ namespace FlashCardsApp
             pubSubjectPage = subjectPage;
 
         }
+
+
+
+
+
+
+
+
+
 
         private void btnEdit_Clicked(object sender, EventArgs e)
         {
@@ -88,6 +128,31 @@ namespace FlashCardsApp
         {
 
             answer.TextColor = Color.Black;
+
+        }
+
+        
+        
+
+        private void SwipeContainer_Swipe(object sender, SwipedEventArgs e)
+        {
+
+            bool popupResult = true;
+
+            question.Text = "Swiped Up";
+
+
+
+            popupResult = DisplayAlert("Alert", "Are you sure you want to delete this card?", "Delete", "Cancel").Result;
+
+
+
+            //if (popupResult)
+            //{
+            //   ArrayControl.deleteCard(pubSelectedSubject, pubSelectedCard);
+            //}
+            
+
 
         }
     }

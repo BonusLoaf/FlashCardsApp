@@ -10,6 +10,7 @@
       "FlashCardsApp/1.0.0": {
         "dependencies": {
           "Azure.Core": "1.2.0",
+          "ContextViewCell": "2.0.1",
           "Microsoft.Azure.DocumentDB.Core": "2.10.1",
           "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "12.0.3",
@@ -33,6 +34,17 @@
           "lib/netstandard2.0/Azure.Core.dll": {
             "assemblyVersion": "1.2.0.0",
             "fileVersion": "1.200.20.20304"
+          }
+        }
+      },
+      "ContextViewCell/2.0.1": {
+        "dependencies": {
+          "Xamarin.Forms": "4.3.0.908675"
+        },
+        "runtime": {
+          "lib/netstandard2.0/ContextMenu.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1054,6 +1066,13 @@
       "sha512": "sha512-CMUvtwXp7awhBlMof76Q4yNkAIn/QaDmK2kWE7FoK4PdHUPLgzko1zhc2YwWCYFw/SmIzFL5PFS/W/6qDLhqOw==",
       "path": "azure.core/1.2.0",
       "hashPath": "azure.core.1.2.0.nupkg.sha512"
+    },
+    "ContextViewCell/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-abOW3KkB8zRSBNQoqR2A31/RcpZGR9yyp2bXfT9eV8q7F4JgLtaFj1rGdRcHf5VWOWSLGUNBCaq9SBHticVhKA==",
+      "path": "contextviewcell/2.0.1",
+      "hashPath": "contextviewcell.2.0.1.nupkg.sha512"
     },
     "Microsoft.Azure.DocumentDB.Core/2.10.1": {
       "type": "package",

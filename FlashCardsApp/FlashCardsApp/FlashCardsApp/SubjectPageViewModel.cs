@@ -10,6 +10,13 @@ namespace FlashCardsApp
         private List<string> _cards;
 
 
+
+
+
+        
+
+
+
         public List<string> cards
         {
             get => _cards;

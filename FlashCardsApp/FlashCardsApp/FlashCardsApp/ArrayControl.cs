@@ -7,6 +7,9 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
 
+using Newtonsoft.Json.Linq;
+
+
 namespace FlashCardsApp
 {
     class ArrayControl
@@ -112,35 +115,71 @@ namespace FlashCardsApp
             subjectArray[1] = new Subject("Subject name 1", 3, cardArray1);
             subjectArray[2] = new Subject("Subject name 2", 3, cardArray2);
 
-            SaveArray();
+            //SaveArray();
         }
 
-        public static void SaveArray()
+        public static void SaveArrayToText()
         {
 
-            string json = JsonConvert.SerializeObject(subjectArray, Formatting.Indented);
-            //File.WriteAllText(@"c:subject_storage.json", JsonConvert.SerializeObject(subjectArray));
+            //runs the jsonArray method and stores the array 
+            JArray subStore = JsonPacker();
 
-            //using (StreamWriter file = File.CreateText(@"c:\subject_storage.json"))
-            //{
-            //    JsonSerializer serializer = new JsonSerializer();
-            //    serializer.Serialize(file, subjectArray);
-            //}
+            //Console.WriteLine(subStore.ToString());
 
-            using (StreamWriter text = new StreamWriter("E:\\subject_store.txt"))
+
+            var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var filePath = System.IO.Path.Combine(documentsPath, "testfile.txt");
+
+            //Console.WriteLine(filePath);
+
+            using (StreamWriter text = new StreamWriter(File.Create(filePath)))
             {
-                text.WriteLine(json);
+                text.WriteLine(subStore.ToString());
             }
 
+            Console.WriteLine(File.ReadAllText(filePath));
         }
-        //
-        //public static void loadArray()
-        //{
-        //    Subject[] subjectArrayTemp = JsonConvert.DeserializeObject<Subject[]>(File.ReadAllText(@"c:\Subjects.json"));
-        //
-        //    subjectArray = subjectArrayTemp;
-        //
-        //}
+
+
+        //this method makes and returns a jsonArray
+        public static JArray JsonPacker()
+        {
+
+            //creates the jsonArray that will be filled with data
+            JArray JsonStorage = new JArray();
+
+            //loops based on the number of subjects created
+            for (int i = 0; i < subjectArray.Length; i++)
+            {
+                //creates a temporary object to store data for a single subject
+                JObject sub = new JObject();
+
+                //adds the name and number of cards to the sub object
+                sub.Add(subjectArray[i].getSubjectName(), "Sub_name");
+                sub.Add(Convert.ToString(subjectArray[i].getNumberOfCards()), "Sub_card_num");
+
+                //creates a temporary object to store card info in
+                JObject cards = new JObject();
+
+                //loops based on number of cards the subject has
+                for (int j = 0; j < subjectArray[i].getNumberOfCards(); j++)
+                {
+                    //adds the card questions and answers to the temporary card object
+                    cards.Add(subjectArray[i].getCardData()[j].getCardQuestion(), "Card_question");
+                    cards.Add(subjectArray[i].getCardData()[j].getCardAnswer(), "Card_answer");
+                }
+                //adds the temporary card object to the subject object
+                sub.Add(JsonConvert.SerializeObject(cards, Formatting.Indented), "Card_data");
+
+                //adds the temp subject object to the JsonArray
+                JsonStorage.Add(sub);
+            }
+
+            //returns the JsonArray
+            return JsonStorage;
+
+        }
+
 
         public static void updateArrayTests() 
         {

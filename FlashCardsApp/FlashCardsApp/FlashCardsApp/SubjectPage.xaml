@@ -23,17 +23,32 @@
                 HorizontalOptions="CenterAndExpand"
                     Clicked="btnCreate_Clicked" 
                     />
-            
 
-            <ListView 
+
             
-            ItemsSource="{Binding cards}"
+            
+            
+            
+            <ListView
+                
+                
+                ItemsSource="{Binding cards}"
                   SelectionMode="Single"
                   x:Name="CardsListView"
                   SelectedItem="{Binding SelectedCard}"
                   HorizontalOptions="Center"
-                  VerticalOptions="CenterAndExpand"
-                    />
+                  VerticalOptions="CenterAndExpand">
+                
+                
+
+
+            </ListView>
+            
+            
+            
+                
+                
+                
 
 
         </StackLayout>

@@ -4,6 +4,8 @@ public class MonoPackageManager_Resources {
 		/* We need to ensure that "FlashCardsApp.Android.dll" comes first in this list. */
 		"FlashCardsApp.Android.dll",
 		"Azure.Core.dll",
+		"ContextMenu.dll",
+		"ContextMenu.Droid.dll",
 		"FlashCardsApp.dll",
 		"FormsViewGroup.dll",
 		"Microsoft.Azure.DocumentDB.Core.dll",

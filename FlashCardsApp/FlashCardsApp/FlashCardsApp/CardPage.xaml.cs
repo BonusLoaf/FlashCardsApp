@@ -134,16 +134,26 @@ namespace FlashCardsApp
         
         
 
-        private void SwipeContainer_Swipe(object sender, SwipedEventArgs e)
+        private async void SwipeContainer_Swipe(object sender, SwipedEventArgs e)
         {
 
-            bool popupResult = true;
 
-            question.Text = "Swiped Up";
-
+            bool popupResult = await DisplayAlert("Alert", "Are you sure you want to delete this card?", "Delete", "Cancel");
 
 
-            popupResult = DisplayAlert("Alert", "Are you sure you want to delete this card?", "Delete", "Cancel").Result;
+            if(popupResult)
+            {
+
+                ArrayControl.deleteCard(pubSelectedSubject, pubSelectedCard);
+
+            }
+
+
+
+            this.Navigation.RemovePage(this);
+
+
+            pubSubjectPage.updateCards();
 
 
 
@@ -151,7 +161,7 @@ namespace FlashCardsApp
             //{
             //   ArrayControl.deleteCard(pubSelectedSubject, pubSelectedCard);
             //}
-            
+
 
 
         }

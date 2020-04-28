@@ -5,7 +5,8 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.Azure.Cosmos;
+
+using System.Configuration;
 
 using Newtonsoft.Json.Linq;
 
@@ -14,77 +15,7 @@ namespace FlashCardsApp
 {
     class ArrayControl
     {
-        //*****************DATABASE START*********************
-
-                    //add endpoint 
-   //                private static readonly string EndpointUri = "https://alberto-fernandez.documents.azure.com:443/";
-   //                
-   //                // The primary key for the Azure Cosmos account (to be added)
-   //                private static readonly string PrimaryKey = "kug8WIw5ULptERJvaKcF02Gf01G9ePWZSUk6WFeAuyUDdWlmdt5FXiRXSkdeB6RuXFL3Q117Poj7Mev6jGzAVg==";
-   //                
-   //                // The Cosmos client instance
-   //                private CosmosClient cosmosClient;
-   //                
-   //                // The database we will create
-   //                private Database database;
-   //                
-   //                // The container we will create.
-   //                private Container container;
-   //                
-   //                // The name of the database and container we will create
-   //                private string databaseId = "FlashCards";
-   //                private string containerId = "Soft262";
-   //                
-   //                
-   //                  public async Task Go()
-   //                  {
-   //                //createsan instance of cosmos client
-   //                this.cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
-   //                
-   //                      
-   //                  }
-               //    ********************** PUT IN MAIN
-                         //  {
-                         //       ArrayControl p = new ArrayControl();
-                         //       await p.Go();
-                         //
-                         //  }
-               
-               // ********************
-               //
-               //*****************DATABASE END ********************
- //         
- //              public async Task Go()
- //              {
- //                  this.cosmosClient = new CosmosClient(EndpointUri, PrimaryKey, new CosmosClientOptions()
- //                  {
- //                       ApplicationName = "Flash_Cards"
- //                  } );
- //                  
- //                  //create a new database
- //                  this.database = await this.cosmosClient.CreateDatabaseIfNotExistsAsync(databaseId);
- //                  Console.WriteLine("Created Database: {0}\n", this.database.Id);
- //          
- //                  //Create container
- //                  this.container = await this.database.CreateContainerIfNotExistsAsync(containerId, "/SubjectContainer", 400);
- //                  
- //                  await AddSubjectIfNonExistant(new Subject("tempSubject", 3, cardArray))     
- //              }
- //       async Task AddSubjectIfNonExistant(Subject p)
- //           {
- //   
- //               try
- //               {
- //                   //read item to see if it exists
- //                   ItemResponse<Subject> SubResponse = await this.container.ReadItemAsync<Subject>(p.subjectName, new PartitionKey(p.subjectName));
- //               }
- //               catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
- //               {
- //                   ItemResponse<Subject> SubResponse = await this.container.CreateItemAsync<SolPlanet>(p, new PartitionKey(p.subjectName));
- //               }
- //           }
-
-
+    
         public static Subject[] subjectArray = new Subject[3];
         
         public static CardData[] cardArray = new CardData[3];
@@ -116,7 +47,12 @@ namespace FlashCardsApp
             subjectArray[2] = new Subject("Subject name 2", 3, cardArray2);
 
             //SaveArray();
+            deleteCard(1, 1);
         }
+
+        //*****************************************************************************//
+        //                         JSON SAVE START
+        //*****************************************************************************//
 
         public static void SaveArrayToText()
         {
@@ -134,6 +70,7 @@ namespace FlashCardsApp
 
             using (StreamWriter text = new StreamWriter(File.Create(filePath)))
             {
+                //text.WriteLine(Convert.ToString(subjectArray.Length));
                 text.WriteLine(subStore.ToString());
             }
 
@@ -144,7 +81,6 @@ namespace FlashCardsApp
         //this method makes and returns a jsonArray
         public static JArray JsonPacker()
         {
-
             //creates the jsonArray that will be filled with data
             JArray JsonStorage = new JArray();
 
@@ -177,9 +113,27 @@ namespace FlashCardsApp
 
             //returns the JsonArray
             return JsonStorage;
+        }
+
+        public static void JsonReader()
+        {
+            var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var filePath = System.IO.Path.Combine(documentsPath, "testfile.txt");
+
+            StreamReader storageFile = new StreamReader("testfile.txt");
+
+            int numSubjects = Convert.ToInt32(storageFile.ReadLine());
+
+            for (int i = 0; i < numSubjects; i++) 
+            {
+                   
+            }
 
         }
 
+        //*****************************************************************************//
+        //                         JSON SAVE END
+        //*****************************************************************************//
 
         public static void updateArrayTests() 
         {
@@ -229,21 +183,24 @@ namespace FlashCardsApp
             int numCards = subjectArray[selectedSubject].getNumberOfCards();
 
             //creates temporary array one smaller than current subjects
-            CardData[] tempCardArray = new CardData[numCards - 1];
+
+
+            CardData[] tempCardArray = new CardData[numCards-1];
+
 
             for (int i = 0; i < selectedCard; i++)
             {
                 //fills temporary array with cards up to the card to be deleted
-                tempCardArray[i].setCardQuestion(subjectArray[selectedSubject].getCardData()[i].getCardQuestion());
-                tempCardArray[i].setCardAnswer(subjectArray[selectedSubject].getCardData()[i].getCardAnswer());
-               
 
+                tempCardArray[i] = new CardData(subjectArray[selectedSubject].getCardData()[i].getCardQuestion(), subjectArray[selectedSubject].getCardData()[i].getCardAnswer());
+        
             }
+
             for (int j = selectedCard; j < (numCards - 1); j++)
             {
-                //from where the last loop left off, skips the card to be deleted and fills in the remaining slots with the rest of the cards
-                tempCardArray[j].setCardQuestion(subjectArray[selectedSubject].getCardData()[j + 1].getCardQuestion());
-                tempCardArray[j].setCardAnswer(subjectArray[selectedSubject].getCardData()[j + 1].getCardAnswer());
+                ////from where the last loop left off, skips the card to be deleted and fills in the remaining slots with the rest of the cards
+                tempCardArray[j] = new CardData(subjectArray[selectedSubject].getCardData()[j+1].getCardQuestion(), subjectArray[selectedSubject].getCardData()[j+1].getCardAnswer());
+
             }
 
             //finally, replaces the old array with the new temp one with the card removed

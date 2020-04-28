@@ -58,9 +58,19 @@
                 VerticalOptions="End" 
                 HorizontalOptions="FillAndExpand"
                 Clicked="btnShow_Clicked"   
-                BackgroundColor="Blue"
-                
-                />
+                BackgroundColor="Blue"/>
+
+
+                <Label
+                Text="Swipe Up To Delete Card"
+                   x:Name="lblDelete"
+                VerticalOptions="End" 
+                HorizontalOptions="FillAndExpand"  
+                BackgroundColor="Blue"/>
+
+
+
+                    
 
 
 

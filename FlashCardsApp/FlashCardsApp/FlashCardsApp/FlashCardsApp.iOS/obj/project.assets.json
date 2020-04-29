@@ -3084,11 +3084,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\samue\\Downloads\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.iOS\\FlashCardsApp.iOS.csproj",
+      "projectUniqueName": "E:\\GitBackup\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.iOS\\FlashCardsApp.iOS.csproj",
       "projectName": "FlashCardsApp.iOS",
-      "projectPath": "C:\\Users\\samue\\Downloads\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.iOS\\FlashCardsApp.iOS.csproj",
+      "projectPath": "E:\\GitBackup\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.iOS\\FlashCardsApp.iOS.csproj",
       "packagesPath": "C:\\Users\\samue\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\samue\\Downloads\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.iOS\\obj\\",
+      "outputPath": "E:\\GitBackup\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -3109,8 +3109,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\samue\\Downloads\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.csproj": {
-              "projectPath": "C:\\Users\\samue\\Downloads\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.csproj"
+            "E:\\GitBackup\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.csproj": {
+              "projectPath": "E:\\GitBackup\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp\\FlashCardsApp.csproj"
             }
           }
         }

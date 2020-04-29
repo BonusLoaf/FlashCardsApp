@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Configuration;
 
 using Newtonsoft.Json.Linq;
-
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace FlashCardsApp
 {
     class ArrayControl
     {
+
+        public static SwipeDirection pubSwipe;
 
         public static Subject[] subjectArray = new Subject[3];
 
@@ -30,122 +33,82 @@ namespace FlashCardsApp
             // Subject[] subjectArray = new Subject[3];
             // CardData[] cardArray = new CardData[3];
 
-            cardArray0[0] = new CardData("sub 0 question 0", "sub 0 answer 0");
-            cardArray0[1] = new CardData("sub 0 question 1", "sub 0 answer 1");
-            cardArray0[2] = new CardData("sub 0 question 2", "sub 0 answer 2");
-
-            cardArray1[0] = new CardData("sub 1 question 0", "sub 1 answer 0");
-            cardArray1[1] = new CardData("sub 1 question 1", "sub 1 answer 1");
-            cardArray1[2] = new CardData("sub 1 question 2", "sub 1 answer 2");
-
-            cardArray2[0] = new CardData("sub 2 question 0", "sub 2 answer 0");
-            cardArray2[1] = new CardData("sub 2 question 1", "sub 2 answer 1");
-            cardArray2[2] = new CardData("sub 2 question 2", "sub 2 answer 2");
-
-            subjectArray[0] = new Subject("Subject name 0", 3, cardArray0);
-            subjectArray[1] = new Subject("Subject name 1", 3, cardArray1);
-            subjectArray[2] = new Subject("Subject name 2", 3, cardArray2);
-
-            //SaveArray();
+            //     cardArray0[0] = new CardData("sub 0 question 0", "sub 0 answer 0");
+            //     cardArray0[1] = new CardData("sub 0 question 1", "sub 0 answer 1");
+            //     cardArray0[2] = new CardData("sub 0 question 2", "sub 0 answer 2");
+            //
+            //     cardArray1[0] = new CardData("sub 1 question 0", "sub 1 answer 0");
+            //     cardArray1[1] = new CardData("sub 1 question 1", "sub 1 answer 1");
+            //     cardArray1[2] = new CardData("sub 1 question 2", "sub 1 answer 2");
+            //
+            //     cardArray2[0] = new CardData("sub 2 question 0", "sub 2 answer 0");
+            //     cardArray2[1] = new CardData("sub 2 question 1", "sub 2 answer 1");
+            //     cardArray2[2] = new CardData("sub 2 question 2", "sub 2 answer 2");
+            //
+            //     subjectArray[0] = new Subject("Subject name 0", 3, cardArray0);
+            //     subjectArray[1] = new Subject("Subject name 1", 3, cardArray1);
+            //     subjectArray[2] = new Subject("Subject name 2", 3, cardArray2);
+            JsonRead();
+            JsonSave();
             
         }
 
         //*****************************************************************************//
-        //                         JSON SAVE START
+        //                         FILE MANAGEMENT START
         //*****************************************************************************//
 
-        public static void SaveArrayToText()
+        public static void JsonSave()
         {
 
-            //runs the jsonArray method and stores the array 
-            JArray subStore = JsonPacker();
+            //gets the file path to the storage file
+            var documentsPath = FileSystem.AppDataDirectory;
+            var filePath = System.IO.Path.Combine(documentsPath, "testfile.json");
 
-            //Console.WriteLine(subStore.ToString());
-
-
-            var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            var filePath = System.IO.Path.Combine(documentsPath, "testfile.txt");
-
-            //Console.WriteLine(filePath);
-
-            using (StreamWriter text = new StreamWriter(File.Create(filePath)))
-            {
-                //text.WriteLine(Convert.ToString(subjectArray.Length));
-                text.WriteLine(subStore.ToString());
-            }
-
-            Console.WriteLine(File.ReadAllText(filePath));
+            //writes the serialized array to the storage file
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(subjectArray));
         }
 
+        public static void JsonRead()
+        {//gets the file path to the storage file
+            var documentsPath = FileSystem.AppDataDirectory;
+            var filePath = System.IO.Path.Combine(documentsPath, "testfile.json");
 
-        //this method makes and returns a jsonArray
-        public static JArray JsonPacker()
-        {
-            //creates the jsonArray that will be filled with data
-            JArray JsonStorage = new JArray();
+            //var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            //var filePath = System.IO.Path.Combine(documentsPath, "testfile.json");
 
-            //loops based on the number of subjects created
-            for (int i = 0; i < subjectArray.Length; i++)
+           // Console.WriteLine(filePath);
+
+            //opens the file to be read from 
+            using (StreamReader file = File.OpenText(filePath))
             {
-                //creates a temporary object to store data for a single subject
-                JObject sub = new JObject();
-
-                //adds the name and number of cards to the sub object
-                sub.Add(subjectArray[i].getSubjectName(), "Sub_name");
-                sub.Add(Convert.ToString(subjectArray[i].getNumberOfCards()), "Sub_card_num");
-
-                //creates a temporary object to store card info in
-                JObject cards = new JObject();
-
-                //loops based on number of cards the subject has
-                for (int j = 0; j < subjectArray[i].getNumberOfCards(); j++)
-                {
-                    //adds the card questions and answers to the temporary card object
-                    cards.Add(subjectArray[i].getCardData()[j].getCardQuestion(), "Card_question");
-                    cards.Add(subjectArray[i].getCardData()[j].getCardAnswer(), "Card_answer");
-                }
-                //adds the temporary card object to the subject object
-                sub.Add(JsonConvert.SerializeObject(cards, Formatting.Indented), "Card_data");
-
-                //adds the temp subject object to the JsonArray
-                JsonStorage.Add(sub);
-            }
-
-            //returns the JsonArray
-            return JsonStorage;
-        }
-
-        public static void JsonReader()
-        {
-            var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            var filePath = System.IO.Path.Combine(documentsPath, "testfile.txt");
-
-            StreamReader storageFile = new StreamReader("testfile.txt");
-
-            int numSubjects = Convert.ToInt32(storageFile.ReadLine());
-
-            for (int i = 0; i < numSubjects; i++)
-            {
+                //creates a serializer, deserializes the array and copies the data into the subjectArray
+                JsonSerializer serializer = new JsonSerializer();
+                subjectArray = (Subject[])serializer.Deserialize(file, typeof(Subject[]));
 
             }
 
+
         }
+
+       // public static fileCheck()
+       // {
+       //     var documentsPath = FileSystem.AppDataDirectory;
+       //     var filePath = System.IO.Path.Combine(documentsPath, "testfile.json");
+       //     if (File.Exists(filePath) = true)
+       //     {
+       //         JsonRead();
+       //     }
+       //     else
+       //     {
+       //
+       //
+       //     }
+       //
+       // }
 
         //*****************************************************************************//
-        //                         JSON SAVE END
+        //                         FILE MANAGEMENT END
         //*****************************************************************************//
-
-        public static void updateArrayTests()
-        {
-            for (int i = 0; i < subjectArray.Length; i++)
-            {
-                for (int j = 0; j < subjectArray[i].getNumberOfCards(); j++)
-                {
-                    cardArray[j] = new CardData("sub " + i + " question " + j, "sub " + i + "answer " + j);
-                }
-                subjectArray[i] = new Subject("Subject name " + i, subjectArray[i].getNumberOfCards(), cardArray);
-            }
-        }
 
 
         //*********************************************************************

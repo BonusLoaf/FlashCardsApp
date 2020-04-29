@@ -8,26 +8,20 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"
-               />
+        
 
         <Label
             x:Name="lbl1"
-            Text="Naaaaaae"
+            Text="FlashCards"
                VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"/>
-
-        
-        <Button
-            x:Name="btnCreateSbj"
-            Text="Create New Subject"
-            VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"
-            Clicked="btnCreateSbj_Clicked"
+               HorizontalOptions="FillAndExpand"
+            TextColor="White"
+            FontSize="Title"
+            BackgroundColor="DarkBlue"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
             />
-        
+
 
         <ListView 
             
@@ -41,12 +35,15 @@
 
 
 
+        <Button
+            x:Name="btnCreateSbj"
+            VerticalOptions="Start"
+               HorizontalOptions="StartAndExpand"
+            Clicked="btnCreateSbj_Clicked"
+            />
 
 
-
-        <Label Text="Yeeeeeeeeeees"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="Center"/>
+        
 
 
     </StackLayout>

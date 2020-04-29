@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 namespace FlashCardsApp
 {
 
-
+    
 
     public class SwipeContainer : ContentView
     {
@@ -20,12 +20,15 @@ namespace FlashCardsApp
         public SwipeContainer()
         {
             GestureRecognizers.Add(GetSwipeGestureRecognizer(SwipeDirection.Up));
+
+            GestureRecognizers.Add(GetSwipeGestureRecognizer(SwipeDirection.Down));
+
         }
 
         SwipeGestureRecognizer GetSwipeGestureRecognizer(SwipeDirection direction)
         {
             var swipe = new SwipeGestureRecognizer { Direction = direction };
-            swipe.Swiped += (sender, e) => Swipe?.Invoke(this, e);
+            swipe.Swiped += (sender, e) => Swipe?.Invoke(this, e);           
             return swipe;
         }
 
@@ -43,6 +46,8 @@ namespace FlashCardsApp
     public partial class CardPage : ContentPage
     {
 
+        
+
         private CardPageViewModel viewModel;
 
         public CardPageViewModel pubVM;
@@ -56,6 +61,10 @@ namespace FlashCardsApp
         public CardPage(int selectedSubject, int selectedCard, SubjectPage subjectPage)
         {
             InitializeComponent();
+
+            btnEdit.ImageSource = ImageSource.FromResource("FlashCardsApp.Edit.png");
+
+            btnShow.ImageSource = ImageSource.FromResource("FlashCardsApp.Show.png");
 
             CardData thisCard = ArrayControl.subjectArray[selectedSubject].getCardData()[selectedCard];
 
@@ -93,20 +102,22 @@ namespace FlashCardsApp
             if (btnEdit.Text == "Edit")
             {
 
+                answer.IsVisible = true;
+
                 btnEdit.BackgroundColor = Color.Green;
                 btnEdit.Text = "Save";
 
                 question.IsReadOnly = false;
                 answer.IsReadOnly = false;
 
-                answer.TextColor = Color.Black;
+                
 
 
             }
             else
             {
 
-                btnEdit.BackgroundColor = Color.Gray;
+                btnEdit.BackgroundColor = Color.Blue;
                 btnEdit.Text = "Edit";
 
                 question.IsReadOnly = true;
@@ -117,7 +128,7 @@ namespace FlashCardsApp
 
                 pubSubjectPage.updateCards();
 
-
+                ArrayControl.JsonSave();
 
             }
 
@@ -127,7 +138,7 @@ namespace FlashCardsApp
         private void btnShow_Clicked(object sender, EventArgs e)
         {
 
-            answer.TextColor = Color.Black;
+            answer.IsVisible = true;
 
         }
 
@@ -138,31 +149,51 @@ namespace FlashCardsApp
         {
 
 
-            bool popupResult = await DisplayAlert("Alert", "Are you sure you want to delete this card?", "Delete", "Cancel");
 
-
-            if (popupResult)
+            if( == SwipeDirection.Up)
             {
 
-                ArrayControl.deleteCard(pubSelectedSubject, pubSelectedCard);
+
+
+                bool popupResult = await DisplayAlert("Alert", "Are you sure you want to delete this card?", "Delete", "Cancel");
+
+
+                if (popupResult)
+                {
+
+                    ArrayControl.deleteCard(pubSelectedSubject, pubSelectedCard);
+
+                }
+
+
+
+                this.Navigation.RemovePage(this);
+
+
+                pubSubjectPage.updateCards();
+
+
+
+
+
 
             }
+            else if (ArrayControl.pubSwipe == SwipeDirection.Down)
+            {
+
+
+                answer.IsVisible = true;
+
+            }
+            
 
 
 
-            this.Navigation.RemovePage(this);
 
+        }
 
-            pubSubjectPage.updateCards();
-
-
-
-            //if (popupResult)
-            //{
-            //   ArrayControl.deleteCard(pubSelectedSubject, pubSelectedCard);
-            //}
-
-
+        private void SwipeContainer_SwipeDown(object sender, SwipedEventArgs e)
+        {
 
         }
     }

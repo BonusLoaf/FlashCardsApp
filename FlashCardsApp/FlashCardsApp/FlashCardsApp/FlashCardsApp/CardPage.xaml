@@ -10,17 +10,15 @@
 
 
     <ContentPage.Content>
-        <local:SwipeContainer 
+
+
+            <local:SwipeContainer 
                 Swipe="SwipeContainer_Swipe"
+                
+                
+                
                 >
             <StackLayout>
-
-
-
-
-
-
-
 
 
 
@@ -29,6 +27,9 @@
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                    IsReadOnly="True"
+                       
+                       
+                       
                    />
 
 
@@ -39,35 +40,45 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                    IsReadOnly="True"
-                   TextColor="White"
+                       IsVisible="False"
                    />
+                
+
+
+                <Button
+                Text="Show Answer (Or Swipe Down)"
+                   x:Name="btnShow"
+                VerticalOptions="End" 
+                HorizontalOptions="FillAndExpand"
+                Clicked="btnShow_Clicked"   
+                BackgroundColor="DimGray"
+                    TextColor="White"
+                    
+                    />
+
+
                 <Button
                 Text="Edit"
                    x:Name="btnEdit"
                 VerticalOptions="End" 
                 HorizontalOptions="FillAndExpand"
                 Clicked="btnEdit_Clicked"
-                BackgroundColor="Gray"
-                
+                BackgroundColor="Blue"
+                TextColor="White"
+                    ImageSource=""
                 />
-
-
-                <Button
-                Text="Show Answer"
-                   x:Name="btnShow"
-                VerticalOptions="End" 
-                HorizontalOptions="FillAndExpand"
-                Clicked="btnShow_Clicked"   
-                BackgroundColor="Blue"/>
 
 
                 <Label
                 Text="Swipe Up To Delete Card"
                    x:Name="lblDelete"
                 VerticalOptions="End" 
-                HorizontalOptions="FillAndExpand"  
-                BackgroundColor="Blue"/>
-
+                HorizontalOptions="FillAndExpand" 
+                BackgroundColor="IndianRed"
+                    HorizontalTextAlignment="Center"
+                    
+                    
+                    />
 
 
 
@@ -81,6 +92,8 @@
 
             </StackLayout>
         </local:SwipeContainer>
+
+
     </ContentPage.Content>
 
 </ContentPage>

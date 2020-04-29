@@ -23,6 +23,12 @@ namespace FlashCardsApp
         {
             InitializeComponent();
 
+            btnCreateSbj.BackgroundColor = Color.FromHex("#fafafa");
+
+            btnCreateSbj.ImageSource = ImageSource.FromResource("FlashCardsApp.Add.png");
+
+
+
             mp = this;
 
             viewModel = new MainPageViewModel(mp);
@@ -39,7 +45,7 @@ namespace FlashCardsApp
         private async void SubjectListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             int selectedRow = e.ItemIndex;
-            lbl1.Text = selectedRow.ToString();
+            
 
             //var nextPage = new SubjectPage();
 
@@ -57,6 +63,7 @@ namespace FlashCardsApp
         public void UpdateSubjects()
         {
 
+            ArrayControl.JsonSave();
 
             viewModel.updateListView();
 

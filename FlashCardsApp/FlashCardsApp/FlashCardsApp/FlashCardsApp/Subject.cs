@@ -8,9 +8,11 @@ namespace FlashCardsApp
     class Subject
     {
         [JsonProperty(PropertyName = "id")]
-         private string subjectName;
-         private int numberOfCards;
-         private CardData[] cardArray;
+        private string subjectName;
+        [JsonProperty(PropertyName = "numCards")]
+        private int numberOfCards;
+        [JsonProperty(PropertyName = "cardData")]
+        private CardData[] cardArray;
 
         public override string ToString()
         {

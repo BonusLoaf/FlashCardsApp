@@ -7,30 +7,33 @@
              x:Class="FlashCardsApp.SubjectPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="indexLabel"
-                Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="btnDelete"
-                    Text="Delete Subject"
-                    VerticalOptions="CenterAndExpand" 
+
+
+
+
+            <Entry Text="SubjName.error"
+                   x:Name="subjectTitle"
+                VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand"
-                    Clicked="btnDelete_Clicked"  
-                    />
-            <Button x:Name="btnCreate"
-                    Text="Create New Card"
-                    VerticalOptions="CenterAndExpand" 
+                   IsReadOnly="True"
+                   FontSize="Title"
+                   
+                   />
+            <Button x:Name="btnEditName"
+                    VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand"
-                    Clicked="btnCreate_Clicked" 
+                    Clicked="btnEditName_Clicked" 
+                    BackgroundColor="LightGray"
+                    Text="Title"
                     />
 
 
-            
-            
-            
-            
+
+
+
+
             <ListView
-                
+
                 
                 ItemsSource="{Binding cards}"
                   SelectionMode="Single"
@@ -38,17 +41,27 @@
                   SelectedItem="{Binding SelectedCard}"
                   HorizontalOptions="Center"
                   VerticalOptions="CenterAndExpand">
-                
-                
-
 
             </ListView>
-            
-            
-            
-                
-                
-                
+
+
+
+            <Button x:Name="btnCreate"
+                    
+                    VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="StartAndExpand"
+                    BackgroundColor="SlateGray"
+                    Clicked="btnCreate_Clicked" 
+                    />
+
+            <Button x:Name="btnDelete"
+                    VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="StartAndExpand"
+                    Clicked="btnDelete_Clicked"  
+                    BackgroundColor="White"
+                    ImageSource=""
+                    />
+
 
 
         </StackLayout>

@@ -25,7 +25,19 @@ namespace FlashCardsApp
         {
             InitializeComponent();
 
-            indexLabel.Text = ArrayControl.subjectArray[selectedSubject].getSubjectName(); ;
+            btnDelete.BackgroundColor = Color.FromHex("#fafafa");
+
+            btnCreate.BackgroundColor = Color.FromHex("#fafafa");
+
+            btnEditName.BackgroundColor = Color.FromHex("#fafafa");
+
+            btnDelete.ImageSource = ImageSource.FromResource("FlashCardsApp.Delete.png");
+
+            btnCreate.ImageSource = ImageSource.FromResource("FlashCardsApp.Add.png");
+
+            btnEditName.ImageSource = ImageSource.FromResource("FlashCardsApp.Edit.png");
+
+            subjectTitle.Text = ArrayControl.subjectArray[selectedSubject].getSubjectName(); ;
 
 
             viewModel = new SubjectPageViewModel(selectedSubject);
@@ -70,6 +82,8 @@ namespace FlashCardsApp
         private void btnCreate_Clicked(object sender, EventArgs e)
         {
             ArrayControl.CreateCard(pubSelectedSubject);
+
+            updateCards();
         }
 
 
@@ -81,12 +95,43 @@ namespace FlashCardsApp
             CardsListView.ItemsSource = null;
             CardsListView.ItemsSource = viewModel.cards;
 
+
+            ArrayControl.JsonSave();
+
         }
 
+        private void btnEditName_Clicked(object sender, EventArgs e)
+        {
+
+            if (btnEditName.Text == "Title")
+            {
+
+                btnEditName.BackgroundColor = Color.Green;
+                btnEditName.Text = "Save";
+
+                subjectTitle.IsReadOnly = false;
 
 
-      
+            }
+            else
+            {
+
+                btnEditName.BackgroundColor = Color.FromHex("#fafafa");
+                btnEditName.Text = "Title";
+
+                subjectTitle.IsReadOnly = true;
+                
+
+                ArrayControl.EditSubject(pubSelectedSubject, subjectTitle.Text);
+
+                pubMainPageVM.pubMP.UpdateSubjects();
 
 
+                ArrayControl.JsonSave();
+
+            }
+
+
+        }
     }
 }

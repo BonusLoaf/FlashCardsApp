@@ -9,7 +9,8 @@
         <StackLayout>
 
 
-
+            <!-- Initialises the view for the Subject Page -->
+            <!-- Title, edit button, listview, create and delete buttons -->
 
             <Entry Text="SubjName.error"
                    x:Name="subjectTitle"

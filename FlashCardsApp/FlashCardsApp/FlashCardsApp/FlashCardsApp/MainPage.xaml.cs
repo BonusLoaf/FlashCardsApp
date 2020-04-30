@@ -19,15 +19,18 @@ namespace FlashCardsApp
 
         public MainPage mp;
 
+
+
+        //Sets up the main page and binds its viewmodel
+        //Assigns an image to the 'create' button and gives its background transparency
         public MainPage()
         {
+
             InitializeComponent();
 
             btnCreateSbj.BackgroundColor = Color.FromHex("#fafafa");
 
             btnCreateSbj.ImageSource = ImageSource.FromResource("FlashCardsApp.Add.png");
-
-
 
             mp = this;
 
@@ -35,31 +38,33 @@ namespace FlashCardsApp
 
             BindingContext = viewModel;
 
-
-
             SubjectsListView.ItemTapped += SubjectListView_ItemTapped;
-
-
         }
 
+
+
+        //Opens a subject page, with information based on the subject the user selected
         private async void SubjectListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+
             int selectedRow = e.ItemIndex;
-            
 
-            //var nextPage = new SubjectPage();
+            await Navigation.PushAsync(new SubjectPage(selectedRow, viewModel, false));
 
-            await Navigation.PushAsync(new SubjectPage(selectedRow, viewModel));
         }
 
-        private void btnCreateSbj_Clicked(object sender, EventArgs e)
+        //Adds a new subject to the subject array, updates the list view, and takes the user to the subject page with edit mode enabled
+        private async void btnCreateSbj_Clicked(object sender, EventArgs e)
         {
             ArrayControl.CreateSubject("New Subject");
 
-
             UpdateSubjects();
+
+            await Navigation.PushAsync(new SubjectPage(ArrayControl.subjectArray.Length - 1, viewModel, true));
+
         }
 
+        //Saves all of the arrays to a JSON file and refreshes the main page list view
         public void UpdateSubjects()
         {
 
@@ -73,5 +78,18 @@ namespace FlashCardsApp
         }
 
 
+        //Detecs if the user swipes down, and saves the arrays to a JSON file then tells the user
+        private async void SwipeContainer_Swipe(object sender, SwipedEventArgs e)
+        {
+
+            if (e.Direction == SwipeDirection.Down)
+            {
+
+                ArrayControl.JsonSave();
+
+                await DisplayAlert("Alert", "Cards Saved Successfully!", "Ok");
+
+            }
+        }
     }
 }

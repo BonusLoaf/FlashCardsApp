@@ -3,14 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:FlashCardsApp"
              mc:Ignorable="d"
              x:Class="FlashCardsApp.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
+    
+    <!-- Creates a swipe container for syncing the cards with the persistent storage -->
+    
+    <local:SwipeContainer 
         
+                Swipe="SwipeContainer_Swipe"
+        >
 
-        <Label
+
+
+
+
+
+
+        <StackLayout>
+
+
+            <!-- Initialises all the UI for the Main page -->
+            <!-- Title, list of subjects, create subject button -->
+
+
+            <Label
             x:Name="lbl1"
             Text="FlashCards"
                VerticalOptions="CenterAndExpand"
@@ -23,7 +41,7 @@
             />
 
 
-        <ListView 
+            <ListView 
             
             ItemsSource="{Binding subjects}"
                   SelectionMode="Single"
@@ -35,7 +53,7 @@
 
 
 
-        <Button
+            <Button
             x:Name="btnCreateSbj"
             VerticalOptions="Start"
                HorizontalOptions="StartAndExpand"
@@ -43,9 +61,11 @@
             />
 
 
-        
 
 
-    </StackLayout>
 
+        </StackLayout>
+
+
+    </local:SwipeContainer>
 </ContentPage>

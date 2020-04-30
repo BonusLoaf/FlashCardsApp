@@ -13,6 +13,8 @@ namespace FlashCardsApp
     public partial class SubjectPage : ContentPage
     {
 
+        //pubViewModel and pubMainPageVM allow the use of pages created previously to be used in methods associated with buttons/events
+
         private SubjectPageViewModel viewModel;
 
         public SubjectPageViewModel pubViewModel;
@@ -21,7 +23,12 @@ namespace FlashCardsApp
 
         public MainPageViewModel pubMainPageVM;
 
-        public SubjectPage(int selectedSubject, MainPageViewModel mainPageVM)
+
+        //Sets up the subject page
+        //Checks if the page was created in edit mode
+        //Binds this page to the viewmodel
+        //Assigns images to all of the buttons and gives them a transparent background
+        public SubjectPage(int selectedSubject, MainPageViewModel mainPageVM, bool editMode)
         {
             InitializeComponent();
 
@@ -40,6 +47,18 @@ namespace FlashCardsApp
             subjectTitle.Text = ArrayControl.subjectArray[selectedSubject].getSubjectName(); ;
 
 
+            if (editMode)
+            {
+
+
+                btnEditName.Text = "Save";
+                btnEditName.BackgroundColor = Color.Green;
+
+                subjectTitle.IsReadOnly = false;
+
+            }
+
+
             viewModel = new SubjectPageViewModel(selectedSubject);
 
             BindingContext = viewModel;
@@ -56,21 +75,21 @@ namespace FlashCardsApp
 
         }
 
+
+
+        //Opens a card page, with information based on the card the user selected
         private async void CardsListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             int selectedRow = e.ItemIndex;
 
-            await Navigation.PushAsync(new CardPage(pubSelectedSubject,selectedRow, this));
+            await Navigation.PushAsync(new CardPage(pubSelectedSubject,selectedRow, this, false));
         }
 
        
-
+        //Deletes the subject that the user is currently on the page for, then removes the page and updates the mainpage listview
         private void btnDelete_Clicked(object sender, EventArgs e)
         {
             ArrayControl.DeleteSubject(pubSelectedSubject);
-
-            
-
 
             this.Navigation.RemovePage(this);
 
@@ -79,14 +98,18 @@ namespace FlashCardsApp
 
         }
 
-        private void btnCreate_Clicked(object sender, EventArgs e)
+
+        //Adds a new card to the card array, updates the list view, and takes the user to the card page with edit mode enabled
+        private async void btnCreate_Clicked(object sender, EventArgs e)
         {
             ArrayControl.CreateCard(pubSelectedSubject);
 
             updateCards();
+
+            await Navigation.PushAsync(new CardPage(pubSelectedSubject, ArrayControl.cardArray.Length - 1, this, true));
         }
 
-
+        //Saves all of the arrays to a JSON file and refreshes the list view
         public void updateCards()
         {
 
@@ -100,6 +123,9 @@ namespace FlashCardsApp
 
         }
 
+
+        //If the page is in view mode, tapping the edit button will enable edit mode, allowing the user to change the name of the subject
+        //Once in edit mode the button changes to a save button; when pressed the changed entry will be saved and the page will go back into view mode
         private void btnEditName_Clicked(object sender, EventArgs e)
         {
 

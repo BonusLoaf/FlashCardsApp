@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <None Remove="Add.png" />
+    <None Remove="CardBackground.png" />
+    <None Remove="CardBackgroundOpen.png" />
     <None Remove="Delete.png" />
     <None Remove="Edit.png" />
     <None Remove="Show.png" />
@@ -19,6 +21,8 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Add.png" />
+    <EmbeddedResource Include="CardBackground.png" />
+    <EmbeddedResource Include="CardBackgroundOpen.png" />
     <EmbeddedResource Include="Delete.png" />
     <EmbeddedResource Include="Edit.png" />
     <EmbeddedResource Include="Show.png" />

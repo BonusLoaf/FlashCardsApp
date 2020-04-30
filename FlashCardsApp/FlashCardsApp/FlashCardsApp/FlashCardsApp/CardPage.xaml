@@ -11,25 +11,26 @@
 
     <ContentPage.Content>
 
-
-            <local:SwipeContainer 
+        <!-- Creates a swipe container for deleting cards and revealing an answer -->
+        
+        <local:SwipeContainer 
                 Swipe="SwipeContainer_Swipe"
                 
                 
                 
                 >
+            
+            <!-- Sets up the card page view: 2 entries to display a question and answer to later be edited, 2 buttons and a label -->
+            
             <StackLayout>
 
 
 
                 <Entry Text="-EMPTY-"
                    x:Name="question"
-                VerticalOptions="StartAndExpand" 
+                VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand"
-                   IsReadOnly="True"
-                       
-                       
-                       
+                   IsReadOnly="True"                       
                    />
 
 
@@ -79,14 +80,6 @@
                     
                     
                     />
-
-
-
-
-
-
-
-
 
 
 

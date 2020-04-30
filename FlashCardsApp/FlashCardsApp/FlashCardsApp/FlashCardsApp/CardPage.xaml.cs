@@ -10,7 +10,7 @@ namespace FlashCardsApp
 {
 
     
-
+    //Allows the swipe containter to recognise swipes in 2 directions (up and down)
     public class SwipeContainer : ContentView
     {
 
@@ -32,10 +32,6 @@ namespace FlashCardsApp
             return swipe;
         }
 
-
-
-
-
     }
 
 
@@ -45,8 +41,6 @@ namespace FlashCardsApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardPage : ContentPage
     {
-
-        
 
         private CardPageViewModel viewModel;
 
@@ -58,9 +52,35 @@ namespace FlashCardsApp
 
         private int pubSelectedCard;
 
-        public CardPage(int selectedSubject, int selectedCard, SubjectPage subjectPage)
+
+        //Sets up the card page
+        //Checks if the page was created with edit mode enabled 
+        //Loads a background image as well as the edit and show images for their buttons
+        //Fills the entries with information from the the card array
+        //Binds card page to its view model
+        public CardPage(int selectedSubject, int selectedCard, SubjectPage subjectPage, bool editMode)
         {
             InitializeComponent();
+
+
+            BackgroundImageSource = ImageSource.FromResource("FlashCardsApp.CardBackground.png");
+
+
+            if(editMode)
+            {
+
+                answer.IsVisible = true;
+
+                btnEdit.BackgroundColor = Color.Green;
+                btnEdit.Text = "Save";
+
+                question.IsReadOnly = false;
+                answer.IsReadOnly = false;
+
+                BackgroundImageSource = ImageSource.FromResource("FlashCardsApp.CardBackgroundOpen.png");
+
+            }
+
 
             btnEdit.ImageSource = ImageSource.FromResource("FlashCardsApp.Edit.png");
 
@@ -88,14 +108,8 @@ namespace FlashCardsApp
         }
 
 
-
-
-
-
-
-
-
-
+        //If the page is in view mode, tapping the edit button will enable edit mode, allowing the user to change the text in the entries
+        //Once in edit mode the button changes to a save button; when pressed the changed entries will be saved and the page will go back into view mode
         private void btnEdit_Clicked(object sender, EventArgs e)
         {
 
@@ -110,7 +124,7 @@ namespace FlashCardsApp
                 question.IsReadOnly = false;
                 answer.IsReadOnly = false;
 
-                
+                BackgroundImageSource = ImageSource.FromResource("FlashCardsApp.CardBackgroundOpen.png");
 
 
             }
@@ -135,22 +149,27 @@ namespace FlashCardsApp
 
         }
 
+
+        //The show button simply shows the text in the 'answer' entry to the user
         private void btnShow_Clicked(object sender, EventArgs e)
         {
 
             answer.IsVisible = true;
 
+            BackgroundImageSource = ImageSource.FromResource("FlashCardsApp.CardBackgroundOpen.png");
+
         }
 
 
 
-
+        //Swiping up will delete the card and take the user back to the subject page if then then press delete on the popup
+        //Swiping down will show the user the answer; giving them the option to either press the button or use a gesture
         private async void SwipeContainer_Swipe(object sender, SwipedEventArgs e)
         {
 
 
 
-            if( == SwipeDirection.Up)
+            if (e.Direction == SwipeDirection.Up)
             {
 
 
@@ -163,38 +182,28 @@ namespace FlashCardsApp
 
                     ArrayControl.deleteCard(pubSelectedSubject, pubSelectedCard);
 
+
+                    this.Navigation.RemovePage(this);
+
+
+                    pubSubjectPage.updateCards();
+
                 }
 
 
-
-                this.Navigation.RemovePage(this);
-
-
-                pubSubjectPage.updateCards();
-
-
-
-
-
-
             }
-            else if (ArrayControl.pubSwipe == SwipeDirection.Down)
+            else if (e.Direction == SwipeDirection.Down)
             {
-
 
                 answer.IsVisible = true;
 
+                BackgroundImageSource = ImageSource.FromResource("FlashCardsApp.CardBackgroundOpen.png");
+
             }
-            
-
-
 
 
         }
 
-        private void SwipeContainer_SwipeDown(object sender, SwipedEventArgs e)
-        {
-
-        }
+       
     }
 }

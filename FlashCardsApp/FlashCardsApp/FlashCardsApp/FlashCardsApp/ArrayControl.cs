@@ -76,15 +76,34 @@ namespace FlashCardsApp
             //var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             //var filePath = System.IO.Path.Combine(documentsPath, "testfile.json");
 
-           // Console.WriteLine(filePath);
+            // Console.WriteLine(filePath);
 
-            //opens the file to be read from 
-            using (StreamReader file = File.OpenText(filePath))
+            //if the file exists, opens the file to be read from 
+            if (File.Exists(filePath))
             {
-                //creates a serializer, deserializes the array and copies the data into the subjectArray
-                JsonSerializer serializer = new JsonSerializer();
-                subjectArray = (Subject[])serializer.Deserialize(file, typeof(Subject[]));
+                using (StreamReader file = File.OpenText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    Subject[] test = (Subject[])serializer.Deserialize(file, typeof(Subject[]));
+                    subjectArray = test;
+                }
+            }
+            else
+            {
 
+                //
+                //
+                //
+                //
+                //
+                //
+                // PUT QUESTIONS/ANSWER CREATION METHOD HERE
+                //
+                //
+                //
+                //
+                //
+                //
             }
 
 
